@@ -1,4 +1,10 @@
 {
   "name": "CopyMeituan",
-  "displayName": "CopyMeituan"
+  "displayName": "CopyMeituan",
+  "expo": {
+    "sdkVersion": "20.0.0",
+    "packagerOpts": {
+      "config": "rn-cli.config.js"
+    }
+  }
 }
