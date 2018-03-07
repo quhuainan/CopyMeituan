@@ -1,16 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import * as React from 'react'
 import Color from '../../widget/Color';
-import { Paragraph } from '../../widget/Text';
+import { Paragraph, Heading3 } from '../../widget/Text';
 import screen from '../../common/screen'
 import NavigationItem from '../../widget/NavigationItem'
 import api from '../../api'
 import GroupPurchaseCell from '../GroupPurchase/GroupPurchaseCell'
+import HomeMenuView from './HomeMenuView';
+import SpacingView from '../../widget/SpacingView';
+import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   
+
     backgroundColor: Color.paper
   },
   searchIcon: {
@@ -26,7 +29,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-  }
+  },
+  recommendHeader: {
+    height: 35,
+    justifyContent: 'center',
+    borderWidth: screen.onePixel,
+    borderColor: Color.border,
+    paddingVertical: 8,
+    paddingLeft: 20,
+    backgroundColor: 'white'
+  },
 });
 
 type Props = {
@@ -98,7 +110,15 @@ export default class HomeScene extends React.Component<Props, State> {
   }
 
   // 请求区域
-  requestDiscount = () => { }
+  requestDiscount = async () => {
+    try {
+      let response = await fetch(api.discount)
+      let json = await response.json()
+      this.setState({ discounts: json.data })
+    } catch (error) {
+      alert(error)
+    }
+  }
 
   //渲染推荐列表每一项
   renderItem = ({ item }: any) => {
@@ -107,7 +127,12 @@ export default class HomeScene extends React.Component<Props, State> {
 
   //渲染列表头
   renderHeader = () => {
-    return <Text>列表头</Text>
+    return <View>
+      
+      <View style={styles.recommendHeader}>
+        <Heading3>猜你喜欢</Heading3>
+      </View>
+    </View>
   }
 
   render() {

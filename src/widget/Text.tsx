@@ -8,6 +8,9 @@ export function Heading1({ style, ...props }: any) {
 export function Heading2({ style, ...props }: any) {
     return <Text style={[styles.h2, style]} {...props} />
 }
+export function Heading3({ style, ...props }: any) {
+    return <Text style={[styles.h3, style]} {...props} /> 
+}
 export function Paragraph({ style, ...props }: any) {
     return <Text style={[styles.p, style]} {...props} />
 }
@@ -22,6 +25,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#222222',
     },
+    h3: {
+        fontSize: 14,
+        color: '#222222'
+    },
+
     p: {
         fontSize: 13,
         color: '#999999'

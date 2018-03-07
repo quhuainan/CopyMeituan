@@ -18,11 +18,9 @@ const styles = StyleSheet.create({
 export default class OrderScene extends React.Component<any, any> {
     render() {
         return (
-            <View style={styles.container}>
                 <Text style={styles.welcome}>
                     订单
         </Text>
-            </View>
         );
     }
 }
