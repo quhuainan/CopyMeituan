@@ -29,7 +29,7 @@ export default class MineScene extends React.Component<any, State> {
 
     onHeaderRefresh = (): any => {
         this.setState({ isRefreshing: true })
-        setTimeout(() => { this.setState({ isRefreshing: false }) }, 2000)
+        setTimeout(() => { this.setState({isRefreshing:false})}, 2000)
     }
 
     renderHeader(): any {
@@ -86,7 +86,7 @@ export default class MineScene extends React.Component<any, State> {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: Color.paper }}>
-                <View style={{ position: 'absolute', width: screen.width, height: screen.height / , backgroundColor: Color.primary }}></View>
+                <View style={{ position: 'absolute', width: screen.width, height: screen.height / 2, backgroundColor: Color.primary }}></View>
                 <ScrollView>
                     <RefreshControl
                         refreshing={this.state.isRefreshing}
