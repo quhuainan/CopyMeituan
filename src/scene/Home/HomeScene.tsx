@@ -128,11 +128,11 @@ export default class HomeScene extends React.Component<Props, State> {
   //渲染列表头
   renderHeader = () => {
     return <View>
-      
+      <HomeMenuView menuInfos={api.menuInfo} onMenuSelected={() => { }} />
       <View style={styles.recommendHeader}>
         <Heading3>猜你喜欢</Heading3>
       </View>
-    </View>
+    </View >
   }
 
   render() {

@@ -32,7 +32,7 @@ export default class HomeMenuView extends React.Component<Props, State> {
         super(props)
     }
     render() {
-      /*   let { menuInfos, onMenuSelected } = this.props
+        let { menuInfos, onMenuSelected } = this.props
         let menuItems = menuInfos.map((info, index) => (<HomeMenuItem key={info.title} onPress={() => { }} icon={info.icon} title={info.title} />))
         let menuViews: Array<React.ReactNode> = []
         let pageCount = Math.ceil(menuItems.length / 10)
@@ -42,11 +42,11 @@ export default class HomeMenuView extends React.Component<Props, State> {
                 {items}
             </View>)
             menuViews.push(menuView)
-        } */
+        }
         return (
-            <Swiper showsButtons={true}>
-                   <Text>123</Text>
-                </Swiper> 
+            <Swiper showsButtons={false} style={{ height: screen.height * 32 / 100 }} loop={false} >
+                {menuViews}
+            </Swiper>
         );
     }
 }
