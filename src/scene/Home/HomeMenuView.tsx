@@ -42,9 +42,11 @@ export default class HomeMenuView extends React.Component<Props, State> {
                 {items}
             </View>)
             menuViews.push(menuView)
-        }
+        } 
         return (
-            <Swiper showsButtons={false} style={{ height: screen.height * 32 / 100 }} loop={false} >
+            <Swiper showsButtons={false} style={{ height: screen.height * 32 / 100 }} loop={false}
+                dot={<View style={{ marginTop: 8 }} />}
+            >
                 {menuViews}
             </Swiper>
         );

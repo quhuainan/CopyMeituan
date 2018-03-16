@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, StatusBar } from 'react-native';
 import * as React from 'react'
 import Color from '../../widget/Color';
 import { Paragraph, Heading3 } from '../../widget/Text';
@@ -9,7 +9,6 @@ import GroupPurchaseCell from '../GroupPurchase/GroupPurchaseCell'
 import HomeMenuView from './HomeMenuView';
 import SpacingView from '../../widget/SpacingView';
 import Swiper from 'react-native-swiper';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -51,6 +50,7 @@ type State = {
 }
 
 export default class HomeScene extends React.Component<Props, State> {
+
   static navigationOptions = ({ navigation }: any) => ({
     headerTitle: (<TouchableOpacity style={styles.searchBar}>
       <Image style={styles.searchIcon} source={require("../../img/home/search_icon.png")} />
@@ -113,28 +113,40 @@ export default class HomeScene extends React.Component<Props, State> {
   requestDiscount = async () => {
     try {
       let response = await fetch(api.discount)
+
       let json = await response.json()
+      console.log('头部响应response', json.data, response)
+
       this.setState({ discounts: json.data })
     } catch (error) {
       alert(error)
+      console.log('头部响应response出错', error)
     }
   }
 
   //渲染推荐列表每一项
   renderItem = ({ item }: any) => {
-    return <GroupPurchaseCell info={item} onPress={() => { }} />
+    return <GroupPurchaseCell info={item} onPress={() => {
+      StatusBar.setBarStyle('default', false)
+      this.props.navigation.navigate('GroupPurchase', { info: item })
+    }} />
   }
 
   //渲染列表头
   renderHeader = () => {
+    console.log('头部数值', this.state.discounts)
     return <View>
       <HomeMenuView menuInfos={api.menuInfo} onMenuSelected={() => { }} />
+      <SpacingView />
       <View style={styles.recommendHeader}>
         <Heading3>猜你喜欢</Heading3>
       </View>
     </View >
   }
+  onGridSelected = (index: number) => {
+    let discount = this.state.discounts[index]
 
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -143,7 +155,6 @@ export default class HomeScene extends React.Component<Props, State> {
           onRefresh={this.requestData}
           refreshing={this.state.refreshing}
           keyExtractor={(item, index) => {
-            console.log(`id ${item.id}`)
             return item.id
           }}
           ListHeaderComponent={this.renderHeader}
